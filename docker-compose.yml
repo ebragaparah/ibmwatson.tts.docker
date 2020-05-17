@@ -3,6 +3,8 @@ version: '3.3'
 services:
   backend:
     build: ../backend
+    links:
+      - "mysql:db"
     ports:
       - "8000:3000"
     volumes:
@@ -11,8 +13,8 @@ services:
       - "../backend/package.json:/opt/site/package.json"
     restart: on-failure
     environment:
-      HOST_DB: mysql
-      MYSQL_DATABASE: commentsuniverse
+      HOST_DATABASE: db
+      DATABASE: commentsuniverse
     depends_on:
       - mysql
   mysql:
